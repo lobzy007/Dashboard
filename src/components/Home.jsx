@@ -33,7 +33,7 @@ const Home = () => {
               <div className="p-5">
                 <Link to={`/card/${i + 1}`}>
                   <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{d.name}</h5>
-                </Li>
+                </Link>
                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                   In the mask of time, John Doe hides his trace,
                   Deep mysteries in his heart, unknown threads of light blaze.</p>
