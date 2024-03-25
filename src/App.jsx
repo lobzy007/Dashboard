@@ -28,7 +28,6 @@ function App() {
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
         {data.data.map((d, i) => {
-
           return <Route path={`/card/${i + 1}`} element={
             <>
               <div className="w-full lg:w-4/12 px-4 mx-auto">
