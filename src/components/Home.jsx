@@ -16,9 +16,9 @@ const Home = () => {
   }
 
   return (
-    <>
+    <div className="px-5 py-1">
 
-      <nav className="w-100 flex justify-between border-b-2 p-3">
+      <nav className="w-100 flex justify-between items-center border-b-2 p-3">
         <a href="" className="text-xl">Cards</a>
         <Link className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" to={"/login"}>Login</Link>
       </nav>
@@ -49,7 +49,8 @@ const Home = () => {
 
         })}
       </div >
-    </>
+
+    </div>
   );
 };
 
