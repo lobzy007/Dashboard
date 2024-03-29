@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import axios from "axios";
 import { Link } from 'react-router-dom'
 import { useQuery } from "react-query";
@@ -11,11 +11,14 @@ export const Dashboard = () => {
 
     const { isLoading, data, isError, isFetching } = useQuery("data", fetchData);
     const [activeItem, setActiveItem] = useState(0)
+    const [isHidden, setHidden] = useState(true)
+
+    const [addName, setAddName] = useState('')
+    const [addImage, setAddImage] = useState('')
 
     if (isLoading || isFetching) {
         return <h1>Loading...</h1>;
     }
-
     return (
         <>
             <div className="flex w-screen text-gray-700">
@@ -80,7 +83,7 @@ export const Dashboard = () => {
                     <div className="flex items-center flex-shrink-0 h-16 px-8 border-b border-gray-300 justify-between">
                         <h1 className="text-lg font-medium">Card Info</h1>
                         <button className="flex items-center flex-shrink-0 h-10 px-3 text-sm font-medium bg-gray-200 rounded hover:bg-gray-300"
-                            href="#">
+                            href="#" onClick={() => { setHidden(false) }}>
                             <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                             </svg>
@@ -102,6 +105,25 @@ export const Dashboard = () => {
                 </div>
 
             </div >
+
+            <div className={`modal absolute ${isHidden ? 'hidden' : ''} left-0 right-0 bottom-0 top-0`}>
+                <div className="container h-full flex flex-col items-center justify-center bg-white gap-4">
+                    <div className='flex gap-4 items-center justify-center'>
+                        <label htmlFor="addName">Name:</label>
+                        <input className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' id='addName' type="text" placeholder='Name' onChange={(e) => { setAddName(e.target.value) }} />
+                    </div>
+                    <div className='flex gap-4 items-center justify-center'>
+                        <label htmlFor="addImg">Img:</label>
+                        <input className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' id='addImg' type="text" placeholder='Url' onChange={(e) => { setAddImage(e.target.value) }} />
+                    </div>
+                    <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={() => {
+                        axios.post('https://65e83bc64bb72f0a9c4eac3a.mockapi.io/fakeAPI', { address: "", id: `${data.data.length + 1}`, img: addImage, name: addName }).then((res) => { console.log(res) }).then(setHidden(true))
+                    }}>Add</button>
+                    <button onClick={() => { setHidden(true) }} className=" underline text-2xl text-black">
+                        Go back
+                    </button>
+                </div>
+            </div>
         </>
     )
 }
