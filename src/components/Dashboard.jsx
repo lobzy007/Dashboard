@@ -71,7 +71,7 @@ export const Dashboard = () => {
                     </button>
                     <div className="flex flex-col flex-grow p-4 overflow-auto">
                         {data.data.map((d, i) => {
-                            return <button onClick={() => { setActiveItem(`${i}`) }} className="flex items-center border-b-2 flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300">
+                            return <button onClick={() => { setActiveItem(`${i}`) }} className="flex items-center border-b-2 flex-shrink-0 h-10 px-2 text-sm font-medium rounded hover:bg-gray-300 truncate">
                                 <span className="leading-none">{`${i + 1}: ${d.name}`}</span>
                             </button>
                         })}

@@ -23,27 +23,29 @@ const Home = () => {
         <Link className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" to={"/login"}>Login</Link>
       </nav>
 
-      <div className="grid grid-cols-4 justify-center gap-5 items-center p-10">
+      <div className="grid grid-cols-4 justify-center gap-5 items-center p-10 lg:">
         {data.data.map((d, i) => {
-          return <div>
-            <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <Link to={`/card/${i + 1}`}>
-                <img className="rounded-t-lg w-full" src={d.img} alt="" />
+          return <div
+            className="block border rounded-lg bg-white shadow-secondary-1 dark:bg-surface-dark">
+            <Link to={`/card/${i + 1}`}>
+              <img
+                className="rounded-t-lg w-full max-h-52 object-cover"
+                src={d.img}
+                alt="" />
+            </Link>
+            <div className="p-6 text-surface dark:text-white">
+              <Link to={`/card/${i + 1}`} className="mb-2 text-xl font-medium leading-tight">{d.name}</Link>
+              <p className="mb-4 text-base">
+                Some quick example text to build on the card title and make up the
+                bulk of the card's content.
+              </p>
+              <Link to={`/card/${i + 1}`}
+                type="button"
+                className="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+                data-twe-ripple-init
+                data-twe-ripple-color="light">
+                Button
               </Link>
-              <div className="p-5">
-                <Link to={`/card/${i + 1}`}>
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{d.name}</h5>
-                </Link>
-                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                  In the mask of time, John Doe hides his trace,
-                  Deep mysteries in his heart, unknown threads of light blaze.</p>
-                <Link to={`/card/${i + 1}`} className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  Read more
-                  <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                  </svg>
-                </Link>
-              </div>
             </div>
           </div>
 
