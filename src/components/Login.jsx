@@ -24,7 +24,7 @@ export const Login = () => {
                                     <label className="text-start block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                                     <input onChange={(e) => setPass(e.target.value)} type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                                 </div>
-                                <Link to={'/dashboard'} type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Sign in</Link>
+                                <Link to={'/dashboard'} type="submit" className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Sign in</Link>
                             </form>
                         </div>
                     </div>
