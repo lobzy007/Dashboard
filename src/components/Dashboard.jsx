@@ -41,8 +41,6 @@ export const Dashboard = () => {
     setInputNameValue(e.target.value);
   };
 
-  // In your input component
-
   if (isLoading || isFetching) {
     return <h1>Loading...</h1>;
   }

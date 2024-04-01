@@ -30,13 +30,13 @@ function App() {
         {data.data.map((d, i) => {
           return <Route path={`/card/${i + 1}`} element={
             <>
-              <div className="w-full px-4 mx-auto p-10">
+              <div className="w-full px-4 mx-auto p-10 text-center">
                 <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
                   <div className="px-6">
                     <div className="flex flex-wrap justify-center">
                       <div className="w-full px-4 flex justify-center">
                         <div className="">
-                          <img alt="..." src={d.img} className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px" />
+                          <img alt="..." src={d.img} className="shadow-xl h-32 object-cover w-32 rounded-full  align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px" />
                         </div>
                       </div>
                       <div className="w-full px-4 text-center mt-20">
@@ -63,10 +63,10 @@ function App() {
                       </div>
                     </div>
                     <div className="text-center mt-12">
-                      <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700">
+                      <h3 className="text-xl font-semibold leading-normal mb-2 text-[#5046E5]">
                         {d.name}
                       </h3>
-                      <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
+                      <div className="text-sm leading-normal mt-0 mb-2 text-[#5046E5] font-bold uppercase">
                         <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
                         Los Angeles, California
                       </div>
