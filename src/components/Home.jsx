@@ -16,9 +16,9 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <div className="dark:bg-[#212121]">
 
-      <nav className="w-100 flex justify-between items-center border-b-2 p-3 mb-6 px-5">
+      <nav className="w-100 flex justify-between items-center border-b-2 p-3 mb-6 px-5 dark:bg-[#212121] dark:text-white">
         <a href="" className="text-xl text-[#5046E5]">Cards</a>
         <ul className="links px-10 flex gap-8 items-center justify-start w-full">
           <li>
@@ -40,7 +40,7 @@ const Home = () => {
         <p className="text-xl">Explore boundless possibilities on our website, where innovation meets seamless user experience.</p>
       </div>
 
-      <div className="info mb-32 px-10 flex flex-col items-center justify-center">
+      <div className="info dark:text-white mb-32 px-10 flex flex-col items-center justify-center">
         <h2 className="text-4xl mb-2">Advantages</h2>
         <p className="mb-10 text-lg">We promise the best quality and full privacy.</p>
         <ul className="flex items-center justify-center gap-10 text-white mb-10">
@@ -48,38 +48,38 @@ const Home = () => {
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-users"></i>
             </div>
-            <p className="text-black text-lg text-center w-full ">User status in the app varies based on activity and access to features.</p>
+            <p className="text-black dark:text-white text-lg text-center w-full  ">User status in the app varies based on activity and access to features.</p>
           </li>
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-shield-halved"></i>
             </div>
-            <p className="text-black text-lg text-center w-full">The website prioritizes user privacy through strict data protection and privacy policies.</p>
+            <p className="text-black dark:text-white text-lg text-center w-full">The website prioritizes user privacy through strict data protection and privacy policies.</p>
           </li>
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-pen-to-square"></i>
             </div>
-            <p className="text-black text-lg text-center w-full">Data updates occur regularly to ensure information accuracy and relevance for users.</p>
+            <p className="text-black dark:text-white text-lg text-center w-full">Data updates occur regularly to ensure information accuracy and relevance for users.</p>
           </li>
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-check"></i>
             </div>
-            <p className="text-black text-lg text-center w-full">
+            <p className="text-black dark:text-white text-lg text-center w-full">
               Trust in the website stems from its security, reliability, and transparency.</p>
           </li>
         </ul>
       </div>
 
-      <div className="users text-center flex flex-col items-center justify-center">
+      <div className="users text-center dark:text-white flex flex-col items-center justify-center">
         <h4 className="text-4xl mb-2">Users</h4>
         <p className="text-lg max-w-4xl">Our users are the heartbeat of our community, driving inspiration and collaboration. Together, we empower each other to reach new heights.</p>
 
         <div className="grid grid-cols-4 justify-center gap-5 items-center p-10 lg:">
           {data.data.map((d, i) => {
             return <div
-              className="block border rounded-lg bg-white shadow-secondary-1 dark:bg-surface-dark text-start">
+              className="block border rounded-lg bg-white shadow-secondary-1 dark:bg-[#383838] text-start">
               <Link to={`/card/${i + 1}`}>
                 <img
                   className="rounded-t-lg w-full max-h-52 object-cover"
@@ -87,7 +87,7 @@ const Home = () => {
                   alt="" />
               </Link>
               <div className="p-6 text-surface dark:text-white">
-                <Link to={`/card/${i + 1}`} className="mb-2 text-xl font-medium leading-tight">{d.name}</Link>
+                <Link to={`/card/${i + 1}`} className="mb-2 text-xl font-medium leading-tight ">{d.name}</Link>
                 <p className="mb-4 text-base">
                   Some quick example text to build on the card title and make up the
                   bulk of the card's content.
