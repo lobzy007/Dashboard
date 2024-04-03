@@ -2,8 +2,10 @@ import axios from "axios";
 import React from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+
 // import LanguageSelector from "./components/language-selector";
 import { Trans, useTranslation } from "react-i18next";
+
 
 const fetchData = () => {
   return axios.get("https://65e83bc64bb72f0a9c4eac3a.mockapi.io/fakeAPI");
@@ -25,7 +27,11 @@ const Home = () => {
   const { title: cardsTitle, txt: cardsTxt, desc, more } = t("cards");
 
   if (isLoading || isFetching) {
-    return <h1>Loading...</h1>;
+    return (
+      <div className="w-full h-[100vh] flex justify-center items-center dark:bg-black">
+        <div className="spinner"></div>
+      </div>
+    );
   }
 
   return (
@@ -33,6 +39,7 @@ const Home = () => {
       <nav className="w-100 flex justify-between items-center border-b-2 p-3 mb-6 px-5">
         <a href="" className="text-xl text-[#5046E5]">
           {nav1}
+
         </a>
         <ul className="links px-10 flex gap-8 items-center justify-start w-full">
           <li>
@@ -50,10 +57,12 @@ const Home = () => {
           to={"/login"}
         >
           {nav5}
+
         </Link>
       </nav>
 
       <div className="showcase bg-gradient-to-r from-violet-600 to-indigo-600 text-white py-40 px-32 mb-20">
+
         <h1 className="text-5xl max-w-3xl mb-5">{title}</h1>
         <p className="text-xl">{txt}</p>
       </div>
@@ -61,35 +70,44 @@ const Home = () => {
       <div className="info mb-32 px-10 flex flex-col items-center justify-center">
         <h2 className="text-4xl mb-2">{itemsTitle}</h2>
         <p className="mb-10 text-lg">{itemsTxt}</p>
+
         <ul className="flex items-center justify-center gap-10 text-white mb-10">
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-users"></i>
             </div>
+
             <p className="text-black text-lg text-center w-full ">{card1}</p>
+
           </li>
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-shield-halved"></i>
             </div>
+
             <p className="text-black text-lg text-center w-full">{card2}</p>
+
           </li>
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-pen-to-square"></i>
             </div>
+
             <p className="text-black text-lg text-center w-full">{card3}</p>
+
           </li>
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-check"></i>
             </div>
+
             <p className="text-black text-lg text-center w-full">{card4}</p>
+
           </li>
         </ul>
       </div>
 
-      <div className="users text-center flex flex-col items-center justify-center">
+      <div className="users text-center dark:text-white flex flex-col items-center justify-center">
         <h4 className="text-4xl mb-2">Users</h4>
         <p className="text-lg max-w-4xl">
           Our users are the heartbeat of our community, driving inspiration and
@@ -99,7 +117,9 @@ const Home = () => {
         <div className="grid grid-cols-4 justify-center gap-5 items-center p-10 lg:">
           {data.data.map((d, i) => {
             return (
+
               <div className="block border rounded-lg bg-white shadow-secondary-1 dark:bg-surface-dark text-start">
+
                 <Link to={`/card/${i + 1}`}>
                   <img
                     className="rounded-t-lg w-full max-h-52 object-cover"
@@ -110,7 +130,9 @@ const Home = () => {
                 <div className="p-6 text-surface dark:text-white">
                   <Link
                     to={`/card/${i + 1}`}
+
                     className="mb-2 text-xl font-medium leading-tight"
+
                   >
                     {d.name}
                   </Link>

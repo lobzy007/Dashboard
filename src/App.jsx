@@ -1,19 +1,20 @@
-import { useQuery } from "react-query";
+import { useQuery, QueryClient, QueryClientProvider } from "react-query";
 import axios from "axios";
-import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import { Login } from "./components/Login";
 import { Dashboard } from "./components/Dashboard";
 import "./App.css";
+import { useState } from "react";
 
 
 const fetchData = () => {
   return axios.get("https://65e83bc64bb72f0a9c4eac3a.mockapi.io/fakeAPI");
 };
 
-
 function App() {
+
+  const [theme, setTheme] = useState(false)
 
   const { isLoading, data, isError, isFetching } = useQuery("data", fetchData);
 
@@ -22,7 +23,7 @@ function App() {
   }
 
   return (
-    <>
+    <div className={`${theme ? 'dark' : 'light'}`}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login></Login>}></Route>
@@ -99,7 +100,13 @@ function App() {
           } />
         })}
       </Routes>
-    </>
+
+      <button onClick={() => {
+        setTheme(!theme)
+      }} className="darkModeBtn fixed bottom-[20px] right-[20px] dark:bg-white dark:text-[#212121] rounded-lg bg-[#212121] hover:cursor-pointer text-white text-4xl px-3 py-2">
+        <i className={`fa-solid fa-${theme ? 'moon' : 'sun'}`}></i>
+      </button>
+    </div>
   );
 }
 

@@ -28,7 +28,7 @@ export const Login = () => {
                             </form>
                         </div>
                     </div>
-                    <Link to={'/'} className='p-5 text-xl underline text-pretty'>Go Back</Link>
+                    <Link to={'/'} className='p-5 dark:text-white text-xl underline text-pretty'>Go Back</Link>
                 </div>
             </section>
         </>
