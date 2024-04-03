@@ -1,0 +1,28 @@
+{
+  "navbar": {
+    "nav1": "Cards",
+    "nav2": "Home",
+    "nav3": "About",
+    "nav4": "News",
+    "nav5": "Login",
+    "rights": " All rights reserved."
+  },
+  "showcase": {
+    "title": "Join us in shaping the future, one click at a time.",
+    "txt": "Explore boundless possibilities on our website, where innovation meets seamless user experience."
+  },
+  "items": {
+    "title": "Advantages",
+    "txt": "We promise the best quality and full privacy.",
+    "card1": "User status in the app varies based on activity and access to features.",
+    "card2": "The website prioritizes user privacy through strict data protection and privacy policies.",
+    "card3": "Data updates occur regularly to ensure information accuracy and relevance for users.",
+    "card4": "Trust in the website stems from its security, reliability, and transparency."
+  },
+  "cards": {
+    "title": "Users",
+    "txt": "Our users are the heartbeat of our community, driving inspiration and collaboration. Together, we empower each other to reach new heights.",
+    "desc": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+    "more": "MORE..."
+  }
+}

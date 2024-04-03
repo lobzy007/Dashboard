@@ -3,12 +3,28 @@ import React from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 
+// import LanguageSelector from "./components/language-selector";
+import { Trans, useTranslation } from "react-i18next";
+
+
 const fetchData = () => {
   return axios.get("https://65e83bc64bb72f0a9c4eac3a.mockapi.io/fakeAPI");
 };
 
 const Home = () => {
   const { isLoading, data, isError, isFetching } = useQuery("data", fetchData);
+  const { t } = useTranslation();
+  const { nav1, nav2, nav3, nav4, nav5, rights } = t("navbar");
+  const { title, txt } = t("showcase");
+  const {
+    title: itemsTitle,
+    txt: itemsTxt,
+    card1,
+    card2,
+    card3,
+    card4,
+  } = t("items");
+  const { title: cardsTitle, txt: cardsTxt, desc, more } = t("cards");
 
   if (isLoading || isFetching) {
     return (
@@ -19,81 +35,74 @@ const Home = () => {
   }
 
   return (
-    <div className="dark:bg-[#212121]">
-      <nav className="w-100 flex justify-between items-center border-b-2 p-3 mb-6 px-5 dark:bg-[#212121] dark:text-white">
+    <div>
+      <nav className="w-100 flex justify-between items-center border-b-2 p-3 mb-6 px-5">
         <a href="" className="text-xl text-[#5046E5]">
-          Cards
+          {nav1}
+
         </a>
         <ul className="links px-10 flex gap-8 items-center justify-start w-full">
           <li>
-            <Link className="underline">Home</Link>
+            <Link className="underline">{nav2}</Link>
           </li>
           <li>
-            <Link className="underline">About</Link>
+            <Link className="underline">{nav3}</Link>
           </li>
           <li>
-            <Link className="underline">News</Link>
+            <Link className="underline">{nav4}</Link>
           </li>
         </ul>
         <Link
           className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           to={"/login"}
         >
-          Login
+          {nav5}
+
         </Link>
       </nav>
 
       <div className="showcase bg-gradient-to-r from-violet-600 to-indigo-600 text-white py-40 px-32 mb-20">
-        <h1 className="text-5xl max-w-3xl mb-5">
-          Join us in shaping the future, one click at a time.
-        </h1>
-        <p className="text-xl">
-          Explore boundless possibilities on our website, where innovation meets
-          seamless user experience.
-        </p>
+
+        <h1 className="text-5xl max-w-3xl mb-5">{title}</h1>
+        <p className="text-xl">{txt}</p>
       </div>
 
-      <div className="info dark:text-white mb-32 px-10 flex flex-col items-center justify-center">
-        <h2 className="text-4xl mb-2">Advantages</h2>
-        <p className="mb-10 text-lg">
-          We promise the best quality and full privacy.
-        </p>
+      <div className="info mb-32 px-10 flex flex-col items-center justify-center">
+        <h2 className="text-4xl mb-2">{itemsTitle}</h2>
+        <p className="mb-10 text-lg">{itemsTxt}</p>
+
         <ul className="flex items-center justify-center gap-10 text-white mb-10">
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-users"></i>
             </div>
-            <p className="text-black dark:text-white text-lg text-center w-full  ">
-              User status in the app varies based on activity and access to
-              features.
-            </p>
+
+            <p className="text-black text-lg text-center w-full ">{card1}</p>
+
           </li>
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-shield-halved"></i>
             </div>
-            <p className="text-black dark:text-white text-lg text-center w-full">
-              The website prioritizes user privacy through strict data
-              protection and privacy policies.
-            </p>
+
+            <p className="text-black text-lg text-center w-full">{card2}</p>
+
           </li>
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-pen-to-square"></i>
             </div>
-            <p className="text-black dark:text-white text-lg text-center w-full">
-              Data updates occur regularly to ensure information accuracy and
-              relevance for users.
-            </p>
+
+            <p className="text-black text-lg text-center w-full">{card3}</p>
+
           </li>
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-check"></i>
             </div>
-            <p className="text-black dark:text-white text-lg text-center w-full">
-              Trust in the website stems from its security, reliability, and
-              transparency.
-            </p>
+
+            <p className="text-black text-lg text-center w-full">{card4}</p>
+
           </li>
         </ul>
       </div>
@@ -108,7 +117,9 @@ const Home = () => {
         <div className="grid grid-cols-4 justify-center gap-5 items-center p-10 lg:">
           {data.data.map((d, i) => {
             return (
-              <div className="block border rounded-lg bg-white shadow-secondary-1 dark:bg-[#383838] text-start">
+
+              <div className="block border rounded-lg bg-white shadow-secondary-1 dark:bg-surface-dark text-start">
+
                 <Link to={`/card/${i + 1}`}>
                   <img
                     className="rounded-t-lg w-full max-h-52 object-cover"
@@ -119,7 +130,9 @@ const Home = () => {
                 <div className="p-6 text-surface dark:text-white">
                   <Link
                     to={`/card/${i + 1}`}
-                    className="mb-2 text-xl font-medium leading-tight "
+
+                    className="mb-2 text-xl font-medium leading-tight"
+
                   >
                     {d.name}
                   </Link>
