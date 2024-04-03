@@ -35,7 +35,7 @@ export const Dashboard = () => {
     fetchData,
     { enabled: false }
   );
-  const [activeItem, setActiveItem] = useState(2);
+  const [activeItem, setActiveItem] = useState(0);
   const [activeId, setActiveId] = useState(0);
   const [isHidden, setHidden] = useState(true);
   const { register, handleSubmit } = useForm();
@@ -356,9 +356,7 @@ export const Dashboard = () => {
                                     type={"submit"}
                                     className="w-full mt-4 bg-slate-400 rounded-md h-10 from-neutral-700"
                                   >
-                                    <Button variant={"outline"} type="submit">
-                                      Save Changes
-                                    </Button>
+                                    Save Changes
                                   </AlertDialogAction>
                                 </div>
                               </form>
