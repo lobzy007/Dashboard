@@ -24,5 +24,30 @@
     "txt": "Our users are the heartbeat of our community, driving inspiration and collaboration. Together, we empower each other to reach new heights.",
     "desc": "Some quick example text to build on the card title and make up the bulk of the card's content.",
     "more": "MORE..."
+  },
+  "login": {
+    "title": "Sign in to your account",
+    "label1": "Your username",
+    "label2": "Password",
+    "sign": "Sign in",
+    "back": "Go Back"
+  },
+  "dashboard": {
+    "table": "Card list",
+    "reload": "Reload",
+    "newitem": "New Item",
+    "img": "Image",
+    "name": "Name",
+    "address": "Address",
+    "ud": "Update & Delete",
+    "update": "Update",
+    "delete": "Delete",
+    "save": "Save Changes",
+    "alertDesc": "This action cannot be undone. This will permanently delete account and remove data from our servers.",
+    "aletTitle": "Are you absolutely sure?",
+    "canc": "Cancel",
+    "cont": "Continue",
+    "back": "Go Back",
+    "add": "Add"
   }
 }

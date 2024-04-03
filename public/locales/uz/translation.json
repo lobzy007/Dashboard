@@ -1,0 +1,53 @@
+{
+  "navbar": {
+    "nav1": "Kartalar",
+    "nav2": "Uy",
+    "nav3": "Haqida",
+    "nav4": "Yangiliklar",
+    "nav5": "Kirish",
+    "rights": "Barcha huquqlar himoyalangan."
+  },
+  "showcase": {
+    "title": "Kelajakni shakllantirishda bizga qo'shiling, bir marta bosish.",
+    "txt": "Innovatsiyalar uzluksiz foydalanuvchi tajribasiga mos keladigan veb-saytimizda cheksiz imkoniyatlarni o'rganing."
+  },
+  "items": {
+    "title": "Afzalliklar",
+    "txt": "Biz eng yaxshi sifat va to'liq maxfiylikni va'da qilamiz.",
+    "card1": "Ilovadagi foydalanuvchi holati faollik va funksiyalarga kirishga qarab farqlanadi.",
+    "card2": "Veb-sayt ma'lumotlarni qat'iy himoya qilish va maxfiylik siyosati orqali foydalanuvchi maxfiyligini birinchi o'ringa qo'yadi.",
+    "card3": "Ma'lumotlarning aniqligi va foydalanuvchilar uchun dolzarbligini ta'minlash uchun ma'lumotlar yangilanishi muntazam ravishda amalga oshiriladi.",
+    "card4": "Veb-saytga ishonch uning xavfsizligi, ishonchliligi va shaffofligidan kelib chiqadi."
+  },
+  "cards": {
+    "title": "Foydalanuvchilar",
+    "txt": "Foydalanuvchilarimiz hamjamiyatimizning yurak urishi, ilhom va hamkorlikni kuchaytiradi. Biz birgalikda yangi marralarni zabt etish uchun bir-birimizga kuch beramiz.",
+    "desc": "Kartochka sarlavhasini yaratish va karta tarkibining asosiy qismini tashkil qilish uchun bir necha tezkor misol matni.",
+    "more": "MORE..."
+  },
+  "login": {
+    "title": "Akkauntihgizga kiring",
+    "label1": "Foydalanuvchi ismi",
+    "label2": "Parol",
+    "sign": "Kirish",
+    "back": "Orqaga qaytish"
+  },
+  "dashboard": {
+    "table": "Foydalanuvchilar ro'yxati",
+    "reload": "Qayta yuklash",
+    "newitem": "Yangi foydalanuvchi",
+    "img": "Rasm",
+    "name": "Ism",
+    "address": "Manzil",
+    "ud": "Yangilash va o'chirish",
+    "update": "Yangilash",
+    "delete": "O'chirish",
+    "save": "Saqlash",
+    "alertDesc": "Bu amalni ortga qaytarib bo'lmaydi. Bu hisob butunlay o'chiriladi va serverlarimizdan ma'lumotlar o'chiriladi.",
+    "aletTitle": "To'liq ishonchingiz komilmi?",
+    "canc": "Bekor qilish",
+    "cont": "Davom etish",
+    "back": "Orqaga qaytish",
+    "add": "Qo'shish"
+  }
+}

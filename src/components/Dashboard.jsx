@@ -24,6 +24,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 const fetchData = () => {
   return axios.get("https://65e83bc64bb72f0a9c4eac3a.mockapi.io/fakeAPI");
@@ -42,6 +43,7 @@ export const Dashboard = () => {
   const [addName, setAddName] = useState("");
   const [addImage, setAddImage] = useState("");
   const navigate = useNavigate();
+  const { t } = useTranslation();
   // const [inputImgValue, setInputImgValue] = useState(data.data[activeItem].img);
   // const [inputNameValue, setInputNameValue] = useState(
   //   data.data[activeItem].name
@@ -56,6 +58,25 @@ export const Dashboard = () => {
       });
     }
   }, [data, activeItem]);
+
+  const {
+    table,
+    reload,
+    newitem,
+    img,
+    name,
+    address,
+    ud,
+    update,
+    delete: dashDelete,
+    alertDesc,
+    aletTitle,
+    save,
+    add,
+    back,
+    canc,
+    cont,
+  } = t("dashboard");
 
   const onSubmit = (data) => {
     axios
@@ -221,9 +242,7 @@ export const Dashboard = () => {
             </svg>
           </a>
           <a
-
             className="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-auto rounded hover:bg-gray-300 hover:dark:bg-[#404040]"
-
             href="#"
           >
             <svg
@@ -246,17 +265,15 @@ export const Dashboard = () => {
         <div className="flex flex-col w-full border-r border-gray-300 h-screen sticky top-0">
           <button className="relative text-sm focus:outline-none group flex justify-between text-center">
             <div className="flex items-center justify-between w-full h-16 px-4 border-b border-gray-300 text-center">
-              <span className="font-medium">Cards list</span>
+              <span className="font-medium">{table}</span>
             </div>
             <div className="flex justify-center">
-              <div className="flex items-center justify-end w-full h-16 px-4 border-b border-gray-300 text-center">
+              <div className="flex items-center justify-end w-full h-16 px-6 border-b border-gray-300 text-center">
                 <span
-
-                  className="font-medium p-5 bg-slate-200 rounded-xl dark:bg-slate-500"
-
+                  className="font-medium px-16 flex justify-center items-center bg-slate-200 rounded-xl dark:bg-slate-500"
                   onClick={() => refetch()}
                 >
-                  Reload
+                  {reload}
                 </span>
               </div>
               <div
@@ -266,9 +283,7 @@ export const Dashboard = () => {
                 }}
               >
                 <span
-
-                  className="font-medium pt-3 pb-3 pl-5 items-center pr-5 flex justify-between bg-slate-200 rounded-xl dark:bg-slate-500"
-
+                  className="font-medium py-2 pl-5 items-center pr-5 flex justify-between bg-slate-200 rounded-xl dark:bg-slate-500"
                   onClick={() => {
                     setHidden(false);
                   }}
@@ -287,7 +302,7 @@ export const Dashboard = () => {
                       d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                     />
                   </svg>
-                  <button className="ml-2 leading-none">New Item</button>
+                  <button className="ml-2 leading-none">{newitem}</button>
                 </span>
               </div>
             </div>
@@ -312,10 +327,10 @@ export const Dashboard = () => {
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[100px]">№</TableHead>
-                <TableHead>Image</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>Address</TableHead>
-                <TableHead className="text-right">Update & Delete</TableHead>
+                <TableHead>{img}</TableHead>
+                <TableHead>{name}</TableHead>
+                <TableHead>{address}</TableHead>
+                <TableHead className="text-right">{ud}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -339,20 +354,18 @@ export const Dashboard = () => {
                             }}
                             className="bg-slate-500 hover:bg-slate-400 text-white hover:white"
                           >
-                            Update
+                            {update}
                           </Button>
                         </AlertDialogTrigger>
 
                         <AlertDialogContent
                           className={"bg-[#3f3f3f] text-white"}
                         >
-
                           <AlertDialogHeader>
                             <AlertDialogTitle
                               className={"flex justify-between items-center"}
                             >
-                              <p>Update</p>{" "}
-
+                              <p>{update}</p>{" "}
                               <AlertDialogCancel
                                 className={"bg-transparent text-white"}
                               >
@@ -362,7 +375,6 @@ export const Dashboard = () => {
                             <AlertDialogDescription
                               className={
                                 "flex flex-col justify-center items-center gap-4 "
-
                               }
                             >
                               <img
@@ -375,7 +387,6 @@ export const Dashboard = () => {
                                 {data.data[activeItem].name}
                               </h1>
                               <h1 className="text-2xl mb-2 text-slate-200">
-
                                 {data.data[activeItem].address}
                               </h1>
                               <form onSubmit={handleSubmit(onSubmit)}>
@@ -383,9 +394,7 @@ export const Dashboard = () => {
                                   <label htmlFor="img">Img:</label>
                                   <input
                                     id="img"
-
                                     className=" w-full border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 bg-[#3f3f3f] text-white"
-
                                     //   value={data.data[activeItem].img}
                                     //   defaultValue={data.data[activeItem].img}
                                     {...register("img")}
@@ -398,9 +407,7 @@ export const Dashboard = () => {
                                   <label htmlFor="name">Name:</label>
                                   <input
                                     id="name"
-
                                     className=" w-full border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 bg-[#3f3f3f] text-white"
-
                                     //   defaultValue={data.data[activeItem].name}
                                     {...register("name")}
                                     value={values.name}
@@ -411,11 +418,9 @@ export const Dashboard = () => {
                                 <div className="w-full px-10 flex items-center gap-5">
                                   <AlertDialogAction
                                     type={"submit"}
-
                                     className="w-full mt-4 bg-slate-400 rounded-md h-10 from-neutral-700 hover:bg-white hover:text-slate-400"
-
                                   >
-                                    Save Changes
+                                    {save}
                                   </AlertDialogAction>
                                 </div>
                               </form>
@@ -429,25 +434,21 @@ export const Dashboard = () => {
                       </AlertDialog>
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
-                          <Button variant="destructive">Delete</Button>
+                          <Button variant="destructive">{dashDelete}</Button>
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                           <AlertDialogHeader>
-                            <AlertDialogTitle>
-                              Are you absolutely sure?
-                            </AlertDialogTitle>
+                            <AlertDialogTitle>{aletTitle}</AlertDialogTitle>
                             <AlertDialogDescription>
-                              This action cannot be undone. This will
-                              permanently delete account and remove data from
-                              our servers.
+                              {alertDesc}
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogCancel>{canc}</AlertDialogCancel>
                             <AlertDialogAction
                               onClick={() => deleteItem(el.id)}
                             >
-                              Continue
+                              {cont}
                             </AlertDialogAction>
                           </AlertDialogFooter>
                         </AlertDialogContent>
@@ -574,7 +575,7 @@ export const Dashboard = () => {
                 .then(setHidden(true));
             }}
           >
-            Add
+            {add}
           </button>
           <button
             onClick={() => {
@@ -582,7 +583,7 @@ export const Dashboard = () => {
             }}
             className=" underline text-2xl text-black"
           >
-            Go back
+            {back}
           </button>
         </div>
       </div>
@@ -633,7 +634,7 @@ export const Dashboard = () => {
                 .then(setHidden(true));
             }}
           >
-            Add
+            {add}
           </button>
           <button
             onClick={() => {
@@ -641,7 +642,7 @@ export const Dashboard = () => {
             }}
             className="underline dark:text-white text-2xl text-black"
           >
-            Go back
+            {back}
           </button>
         </div>
       </div>
