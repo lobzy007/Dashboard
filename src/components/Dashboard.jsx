@@ -221,7 +221,9 @@ export const Dashboard = () => {
             </svg>
           </a>
           <a
+
             className="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-auto rounded hover:bg-gray-300 hover:dark:bg-[#404040]"
+
             href="#"
           >
             <svg
@@ -249,7 +251,9 @@ export const Dashboard = () => {
             <div className="flex justify-center">
               <div className="flex items-center justify-end w-full h-16 px-4 border-b border-gray-300 text-center">
                 <span
+
                   className="font-medium p-5 bg-slate-200 rounded-xl dark:bg-slate-500"
+
                   onClick={() => refetch()}
                 >
                   Reload
@@ -262,7 +266,9 @@ export const Dashboard = () => {
                 }}
               >
                 <span
+
                   className="font-medium pt-3 pb-3 pl-5 items-center pr-5 flex justify-between bg-slate-200 rounded-xl dark:bg-slate-500"
+
                   onClick={() => {
                     setHidden(false);
                   }}
@@ -336,14 +342,17 @@ export const Dashboard = () => {
                             Update
                           </Button>
                         </AlertDialogTrigger>
+
                         <AlertDialogContent
                           className={"bg-[#3f3f3f] text-white"}
                         >
+
                           <AlertDialogHeader>
                             <AlertDialogTitle
                               className={"flex justify-between items-center"}
                             >
                               <p>Update</p>{" "}
+
                               <AlertDialogCancel
                                 className={"bg-transparent text-white"}
                               >
@@ -353,6 +362,7 @@ export const Dashboard = () => {
                             <AlertDialogDescription
                               className={
                                 "flex flex-col justify-center items-center gap-4 "
+
                               }
                             >
                               <img
@@ -360,10 +370,12 @@ export const Dashboard = () => {
                                 src={data.data[activeItem].img}
                                 alt=""
                               />
+
                               <h1 className="text-2xl mb-2 text-white">
                                 {data.data[activeItem].name}
                               </h1>
                               <h1 className="text-2xl mb-2 text-slate-200">
+
                                 {data.data[activeItem].address}
                               </h1>
                               <form onSubmit={handleSubmit(onSubmit)}>
@@ -371,7 +383,9 @@ export const Dashboard = () => {
                                   <label htmlFor="img">Img:</label>
                                   <input
                                     id="img"
+
                                     className=" w-full border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 bg-[#3f3f3f] text-white"
+
                                     //   value={data.data[activeItem].img}
                                     //   defaultValue={data.data[activeItem].img}
                                     {...register("img")}
@@ -384,7 +398,9 @@ export const Dashboard = () => {
                                   <label htmlFor="name">Name:</label>
                                   <input
                                     id="name"
+
                                     className=" w-full border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 bg-[#3f3f3f] text-white"
+
                                     //   defaultValue={data.data[activeItem].name}
                                     {...register("name")}
                                     value={values.name}
@@ -395,7 +411,9 @@ export const Dashboard = () => {
                                 <div className="w-full px-10 flex items-center gap-5">
                                   <AlertDialogAction
                                     type={"submit"}
+
                                     className="w-full mt-4 bg-slate-400 rounded-md h-10 from-neutral-700 hover:bg-white hover:text-slate-400"
+
                                   >
                                     Save Changes
                                   </AlertDialogAction>
