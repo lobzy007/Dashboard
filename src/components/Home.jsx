@@ -2,10 +2,25 @@ import axios from "axios";
 import React from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useEffect } from "react";
+const languages = [
+  { code: "en", lang: "English" },
+  { code: "ru", lang: "Russian" },
+  { code: "uz", lang: "Uzbek" },
+];
 
 // import LanguageSelector from "./components/language-selector";
 import { Trans, useTranslation } from "react-i18next";
-
 
 const fetchData = () => {
   return axios.get("https://65e83bc64bb72f0a9c4eac3a.mockapi.io/fakeAPI");
@@ -13,6 +28,7 @@ const fetchData = () => {
 
 const Home = () => {
   const { isLoading, data, isError, isFetching } = useQuery("data", fetchData);
+  const [position, setPosition] = React.useState("bottom");
   const { t } = useTranslation();
   const { nav1, nav2, nav3, nav4, nav5, rights } = t("navbar");
   const { title, txt } = t("showcase");
@@ -25,6 +41,15 @@ const Home = () => {
     card4,
   } = t("items");
   const { title: cardsTitle, txt: cardsTxt, desc, more } = t("cards");
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    document.body.dir = i18n.dir();
+  }, [i18n, i18n.language]);
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
 
   if (isLoading || isFetching) {
     return (
@@ -35,11 +60,10 @@ const Home = () => {
   }
 
   return (
-    <div>
-      <nav className="w-100 flex justify-between items-center border-b-2 p-3 mb-6 px-5">
+    <div className="dark:bg-[#212121]">
+      <nav className="w-100 flex justify-between items-center border-b-2 p-3 mb-6 px-5 dark:bg-[#212121] dark:text-white">
         <a href="" className="text-xl text-[#5046E5]">
           {nav1}
-
         </a>
         <ul className="links px-10 flex gap-8 items-center justify-start w-full">
           <li>
@@ -52,24 +76,52 @@ const Home = () => {
             <Link className="underline">{nav4}</Link>
           </li>
         </ul>
-        <Link
-          className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          to={"/login"}
-        >
-          {nav5}
-
-        </Link>
+        <ul className="flex justify-center items-center gap-5">
+          <li>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline">Language</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                <DropdownMenuLabel>Language</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuRadioGroup
+                  value={position}
+                  onValueChange={setPosition}
+                >
+                  {languages.map((l) => {
+                    return (
+                      <DropdownMenuRadioItem
+                        value={l.code}
+                        onClick={() => changeLanguage(l.code)}
+                      >
+                        {l.lang}
+                      </DropdownMenuRadioItem>
+                    );
+                  })}
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </li>
+          <li>
+            <Link
+              className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              to={"/login"}
+            >
+              {nav5}
+            </Link>
+          </li>
+        </ul>
       </nav>
 
-      <div className="showcase bg-gradient-to-r from-violet-600 to-indigo-600 text-white py-40 px-32 mb-20">
-
+      <div className="showcase dark:text-white bg-gradient-to-r from-violet-600 to-indigo-600 text-white py-40 px-32 mb-20">
         <h1 className="text-5xl max-w-3xl mb-5">{title}</h1>
         <p className="text-xl">{txt}</p>
       </div>
 
-      <div className="info mb-32 px-10 flex flex-col items-center justify-center">
+      <div className="info mb-32 px-10 flex flex-col items-center justify-center dark:text-white">
         <h2 className="text-4xl mb-2">{itemsTitle}</h2>
-        <p className="mb-10 text-lg">{itemsTxt}</p>
+        <p className="mb-10 text-lg ">{itemsTxt}</p>
 
         <ul className="flex items-center justify-center gap-10 text-white mb-10">
           <li className="flex flex-col items-center justify-center gap-5">
@@ -77,49 +129,40 @@ const Home = () => {
               <i className="text-[100px] fa-solid fa-users"></i>
             </div>
 
-            <p className="text-black text-lg text-center w-full ">{card1}</p>
-
+            <p className="text-black text-lg text-center w-full dark:text-white">{card1}</p>
           </li>
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-shield-halved"></i>
             </div>
 
-            <p className="text-black text-lg text-center w-full">{card2}</p>
-
+            <p className="text-black text-lg text-center w-full dark:text-white">{card2}</p>
           </li>
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-pen-to-square"></i>
             </div>
 
-            <p className="text-black text-lg text-center w-full">{card3}</p>
-
+            <p className="text-black text-lg text-center w-full dark:text-white">{card3}</p>
           </li>
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-check"></i>
             </div>
 
-            <p className="text-black text-lg text-center w-full">{card4}</p>
-
+            <p className="text-black text-lg text-center w-full dark:text-white">{card4}</p>
           </li>
         </ul>
       </div>
 
       <div className="users text-center dark:text-white flex flex-col items-center justify-center">
-        <h4 className="text-4xl mb-2">Users</h4>
-        <p className="text-lg max-w-4xl">
-          Our users are the heartbeat of our community, driving inspiration and
-          collaboration. Together, we empower each other to reach new heights.
-        </p>
+        <h4 className="text-4xl mb-2">{cardsTitle}</h4>
+        <p className="text-lg max-w-4xl">{cardsTxt}</p>
 
         <div className="grid grid-cols-4 justify-center gap-5 items-center p-10 lg:">
           {data.data.map((d, i) => {
             return (
-
-              <div className="block border rounded-lg bg-white shadow-secondary-1 dark:bg-surface-dark text-start">
-
+              <div className="block border rounded-lg bg-white shadow-secondary-1 dark:bg-surface-dark text-start dark:bg-[#383838]">
                 <Link to={`/card/${i + 1}`}>
                   <img
                     className="rounded-t-lg w-full max-h-52 object-cover"
@@ -130,16 +173,11 @@ const Home = () => {
                 <div className="p-6 text-surface dark:text-white">
                   <Link
                     to={`/card/${i + 1}`}
-
                     className="mb-2 text-xl font-medium leading-tight"
-
                   >
                     {d.name}
                   </Link>
-                  <p className="mb-4 text-base">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
+                  <p className="mb-4 text-base">{desc}</p>
                   <Link
                     to={`/card/${i + 1}`}
                     type="button"
@@ -147,7 +185,7 @@ const Home = () => {
                     data-twe-ripple-init
                     data-twe-ripple-color="light"
                   >
-                    More...
+                    {more}
                   </Link>
                 </div>
               </div>
@@ -164,7 +202,7 @@ const Home = () => {
                 href="#"
                 className="text-base leading-6 text-white hover:underline"
               >
-                Home
+                {nav1}
               </a>
             </div>
             <div className="px-5 py-2">
@@ -172,7 +210,7 @@ const Home = () => {
                 href="#"
                 className="text-base leading-6 text-white hover:underline"
               >
-                About
+                {nav2}
               </a>
             </div>
             <div className="px-5 py-2">
@@ -180,7 +218,7 @@ const Home = () => {
                 href="#"
                 className="text-base leading-6 text-white hover:underline"
               >
-                News
+                {nav3}
               </a>
             </div>
             <div className="px-5 py-2">
@@ -188,7 +226,7 @@ const Home = () => {
                 to={"/login"}
                 className="text-base leading-6 text-white hover:underline"
               >
-                Login
+                {nav5}
               </Link>
             </div>
           </div>
@@ -268,7 +306,7 @@ const Home = () => {
           </div>
 
           <p className="mt-8 text-base leading-6 text-center text-white">
-            © 2024 Cards, Inc. All rights reserved.
+            © 2024 Cards, Inc. {rights}
           </p>
         </div>
       </div>
