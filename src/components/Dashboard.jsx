@@ -1,49 +1,101 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import { useForm } from "react-hook-form";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 
 const fetchData = () => {
   return axios.get("https://65e83bc64bb72f0a9c4eac3a.mockapi.io/fakeAPI");
 };
 
 export const Dashboard = () => {
-  const { isLoading, data, isError, isFetching } = useQuery("data", fetchData);
-  const [activeItem, setActiveItem] = useState(0);
+  const { isLoading, data, isError, isFetching, refetch } = useQuery(
+    "data",
+    fetchData,
+    { enabled: false }
+  );
+  const [activeItem, setActiveItem] = useState(2);
+  const [activeId, setActiveId] = useState(0);
   const [isHidden, setHidden] = useState(true);
   const { register, handleSubmit } = useForm();
-  const { values, setValues } = useState({ name: "", img: "" });
-
   const [addName, setAddName] = useState("");
   const [addImage, setAddImage] = useState("");
   const navigate = useNavigate();
-  const [inputImgValue, setInputImgValue] = useState(data.data[activeItem].img);
-  const [inputNameValue, setInputNameValue] = useState(
-    data.data[activeItem].name
-  );
+  // const [inputImgValue, setInputImgValue] = useState(data.data[activeItem].img);
+  // const [inputNameValue, setInputNameValue] = useState(
+  //   data.data[activeItem].name
+  // );
+  const [values, setValues] = useState({ name: "", img: "" });
+
+  useEffect(() => {
+    if (data) {
+      setValues({
+        name: data.data[activeItem]?.name,
+        img: data.data[activeItem]?.img,
+      });
+    }
+  }, [data, activeItem]);
 
   const onSubmit = (data) => {
     axios
       .put(
-        `https://65e83bc64bb72f0a9c4eac3a.mockapi.io/fakeAPI/${activeItem + 1}`,
+        `https://65e83bc64bb72f0a9c4eac3a.mockapi.io/fakeAPI/${activeId}`,
         data
       )
       .catch((err) => console.log(err));
+    refetch();
   };
 
   // Update input value handler
+  // const handleImgInputChange = (e) => {
+  //   setInputImgValue(e.target.value);
+  // };
+
+  // const handleNameInputChange = (e) => {
+  //   setInputNameValue(e.target.value);
+  // };
+
   const handleImgInputChange = (e) => {
-    setInputImgValue(e.target.value);
+    setValues({ ...values, img: e.target.value });
   };
 
   const handleNameInputChange = (e) => {
-    setInputNameValue(e.target.value);
+    setValues({ ...values, name: e.target.value });
+  };
+
+  const deleteItem = (i) => {
+    axios.delete(`https://65e83bc64bb72f0a9c4eac3a.mockapi.io/fakeAPI/${i}`);
+
+    refetch();
   };
 
   if (isLoading || isFetching) {
     return <h1>Loading...</h1>;
   }
+
+  console.log(activeItem);
+  console.log(activeId);
 
   return (
     <>
@@ -165,7 +217,7 @@ export const Dashboard = () => {
             </svg>
           </a>
           <a
-            className="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 mt-auto rounded hover:bg-gray-300"
+            className="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-auto rounded hover:bg-gray-300"
             href="#"
           >
             <svg
@@ -185,14 +237,22 @@ export const Dashboard = () => {
           </a>
         </div>
 
-        <div className="flex flex-col w-56 border-r border-gray-300 h-screen sticky top-0">
-          <button className="relative text-sm focus:outline-none group">
-            <div className="flex items-center justify-between w-full h-16 px-4 border-b border-gray-300 ">
+        <div className="flex flex-col w-full border-r border-gray-300 h-screen sticky top-0">
+          <button className="relative text-sm focus:outline-none group flex justify-between text-center">
+            <div className="flex items-center justify-between w-full h-16 px-4 border-b border-gray-300 text-center">
               <span className="font-medium">Cards list</span>
             </div>
+            <div className="flex items-center justify-end w-full h-16 px-4 border-b border-gray-300 text-center">
+              <span
+                className="font-medium p-5 bg-slate-200 rounded-xl"
+                onClick={() => refetch()}
+              >
+                Reload
+              </span>
+            </div>
           </button>
-          <div className="flex flex-col flex-grow p-4 overflow-auto">
-            {data.data.map((d, i) => {
+          {/* <div className="flex flex-col flex-grow p-4 overflow-auto"> */}
+          {/* {data.data.map((d, i) => {
               return (
                 <button
                   key={i}
@@ -206,11 +266,145 @@ export const Dashboard = () => {
                   <span className="leading-none">{`${i + 1}: ${d.name}`}</span>
                 </button>
               );
-            })}
-          </div>
+            })} */}
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]">№</TableHead>
+                <TableHead>Image</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Address</TableHead>
+                <TableHead className="text-right">Update & Delete</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {data.data?.map((el, i) => {
+                return (
+                  <TableRow key={i}>
+                    <TableCell>{i + 1}</TableCell>
+                    <TableCell className="font-medium">
+                      <img src={el.img} alt="img" className="w-14 h-14" />
+                    </TableCell>
+                    <TableCell>{el.name}</TableCell>
+                    <TableCell>{el.address}</TableCell>
+                    <TableCell className="text-right flex gap-4 justify-end">
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            variant="outline"
+                            onClick={() => {
+                              setActiveItem(i);
+                              setActiveId(el.id);
+                            }}
+                            className="bg-slate-500 hover:bg-slate-400 text-white hover:white"
+                          >
+                            Update
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle
+                              className={"flex justify-between items-center"}
+                            >
+                              <p>Update</p>{" "}
+                              <AlertDialogCancel>X</AlertDialogCancel>
+                            </AlertDialogTitle>
+                            <AlertDialogDescription
+                              className={
+                                "flex flex-col justify-center items-center gap-4"
+                              }
+                            >
+                              <img
+                                className="w-1/4"
+                                src={data.data[activeItem].img}
+                                alt=""
+                              />
+                              <h1 className="text-2xl mb-2 text-black">
+                                {data.data[activeItem].name}
+                              </h1>
+                              <h1 className="text-2xl mb-2">
+                                {data.data[activeItem].address}
+                              </h1>
+                              <form onSubmit={handleSubmit(onSubmit)}>
+                                <div className="w-full px-10 flex items-center gap-5">
+                                  <label htmlFor="img">Img:</label>
+                                  <input
+                                    id="img"
+                                    className="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    //   value={data.data[activeItem].img}
+                                    //   defaultValue={data.data[activeItem].img}
+                                    {...register("img")}
+                                    value={values.img}
+                                    //   onChange={e => setUpValues({...upValues, img: e.target.value})}
+                                    onChange={handleImgInputChange}
+                                  />
+                                </div>
+                                <div className="w-full px-10 flex items-center gap-5">
+                                  <label htmlFor="name">Name:</label>
+                                  <input
+                                    id="name"
+                                    className="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    //   defaultValue={data.data[activeItem].name}
+                                    {...register("name")}
+                                    value={values.name}
+                                    //   defaultValue={values.name}
+                                    onChange={handleNameInputChange}
+                                  />
+                                </div>
+                                <div className="w-full px-10 flex items-center gap-5">
+                                  <AlertDialogAction
+                                    type={"submit"}
+                                    className="w-full mt-4 bg-slate-400 rounded-md h-10 from-neutral-700"
+                                  >
+                                    <Button variant={"outline"} type="submit">
+                                      Save Changes
+                                    </Button>
+                                  </AlertDialogAction>
+                                </div>
+                              </form>
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            {/* <AlertDialogCancel>Cancel</AlertDialogCancel> */}
+                            {/* <AlertDialogAction>Continue</AlertDialogAction> */}
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="destructive">Delete</Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>
+                              Are you absolutely sure?
+                            </AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone. This will
+                              permanently delete account and remove data from
+                              our servers.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => deleteItem(el.id)}
+                            >
+                              Continue
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+          {/* </div> */}
         </div>
 
-        <div className="flex flex-col flex-grow">
+        {/* <div className="flex flex-col flex-grow">
           <div className="flex items-center flex-shrink-0 h-16 px-8 border-b border-gray-300 justify-between">
             <h1 className="text-lg font-medium">Card Info</h1>
             <button
@@ -274,7 +468,7 @@ export const Dashboard = () => {
               </div>
             </form>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div
@@ -335,6 +529,44 @@ export const Dashboard = () => {
           </button>
         </div>
       </div>
+
+      {/* <div className="updateItemModal w-[90vw] h-[500px] fixed top-0 left-0 bg-slate-300 mt-20 mr-20 ml-20 mb-20">
+        <h1 className="text-2xl mb-2">{data.data[activeItem].name}</h1>
+        <img className="w-1/4" src={data.data[activeItem].img} alt="" />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="w-full px-10 flex items-center gap-5">
+            <label htmlFor="img">Img:</label>
+            <input
+              id="img"
+              className="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              //   value={data.data[activeItem].img}
+              //   defaultValue={data.data[activeItem].img}
+              {...register("img")}
+              value={inputImgValue}
+              onChange={handleImgInputChange}
+              //   onChange={e => setUpValues({...upValues, img: e.target.value})}
+            />
+          </div>
+          <div className="w-full px-10 flex items-center gap-5">
+            <label htmlFor="name">Name:</label>
+            <input
+              id="name"
+              className="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              //   defaultValue={data.data[activeItem].name}
+              {...register("name")}
+              value={inputNameValue}
+              onChange={handleNameInputChange}
+              //   defaultValue={values.name}
+              //   onChange={handleChange}
+            />
+          </div>
+          <div className="w-full px-10 flex items-center gap-5">
+            <button className="w-full mt-4 bg-slate-400 rounded-md h-10 from-neutral-700">
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div> */}
     </>
   );
 };
