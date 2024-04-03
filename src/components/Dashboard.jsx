@@ -436,15 +436,19 @@ export const Dashboard = () => {
                         <AlertDialogTrigger asChild>
                           <Button variant="destructive">{dashDelete}</Button>
                         </AlertDialogTrigger>
-                        <AlertDialogContent>
+                        <AlertDialogContent className="bg-[#3f3f3f] text-white">
                           <AlertDialogHeader>
-                            <AlertDialogTitle>{aletTitle}</AlertDialogTitle>
-                            <AlertDialogDescription>
+                            <AlertDialogTitle className=" text-white">
+                              {aletTitle}
+                            </AlertDialogTitle>
+                            <AlertDialogDescription className=" text-white">
                               {alertDesc}
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
-                            <AlertDialogCancel>{canc}</AlertDialogCancel>
+                            <AlertDialogCancel className=" text-black">
+                              {canc}
+                            </AlertDialogCancel>
                             <AlertDialogAction
                               onClick={() => deleteItem(el.id)}
                             >

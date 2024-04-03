@@ -82,8 +82,10 @@ const Home = () => {
               <DropdownMenuTrigger asChild>
                 <Button variant="outline">Language</Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
-                <DropdownMenuLabel>Language</DropdownMenuLabel>
+              <DropdownMenuContent className="w-56 bg-[#3e34af] text-white text-2xl">
+                <DropdownMenuLabel className="text-white">
+                  Language
+                </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuRadioGroup
                   value={position}
@@ -129,28 +131,36 @@ const Home = () => {
               <i className="text-[100px] fa-solid fa-users"></i>
             </div>
 
-            <p className="text-black text-lg text-center w-full dark:text-white">{card1}</p>
+            <p className="text-black text-lg text-center w-full dark:text-white">
+              {card1}
+            </p>
           </li>
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-shield-halved"></i>
             </div>
 
-            <p className="text-black text-lg text-center w-full dark:text-white">{card2}</p>
+            <p className="text-black text-lg text-center w-full dark:text-white">
+              {card2}
+            </p>
           </li>
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-pen-to-square"></i>
             </div>
 
-            <p className="text-black text-lg text-center w-full dark:text-white">{card3}</p>
+            <p className="text-black text-lg text-center w-full dark:text-white">
+              {card3}
+            </p>
           </li>
           <li className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center p-10  bg-gradient-to-r from-violet-600 to-indigo-600 w-[200px] h-[200px] rounded-full">
               <i className="text-[100px] fa-solid fa-check"></i>
             </div>
 
-            <p className="text-black text-lg text-center w-full dark:text-white">{card4}</p>
+            <p className="text-black text-lg text-center w-full dark:text-white">
+              {card4}
+            </p>
           </li>
         </ul>
       </div>
