@@ -119,9 +119,6 @@ export const Dashboard = () => {
     );
   }
 
-  console.log(activeItem);
-  console.log(activeId);
-
   return (
     <>
       <div className="flex w-screen text-gray-700 dark:bg-[#212121] dark:text-white">
@@ -270,14 +267,14 @@ export const Dashboard = () => {
             <div className="flex justify-center">
               <div className="flex items-center justify-end w-full h-16 px-6 border-b border-gray-300 text-center">
                 <span
-                  className="font-medium px-16 flex justify-center items-center bg-slate-200 rounded-xl dark:bg-slate-500"
+                  className="font-medium px-4 py-3 flex justify-center items-center bg-slate-200 rounded-xl dark:bg-slate-500"
                   onClick={() => refetch()}
                 >
                   {reload}
                 </span>
               </div>
               <div
-                className="flex items-center justify-end w-full h-16 px-4 border-b border-gray-300 text-center"
+                className="flex items-center justify-end py-2 px-6 w-full border-b border-gray-300 text-center"
                 onClick={() => {
                   setHidden(false);
                 }}

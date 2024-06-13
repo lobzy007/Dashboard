@@ -14,10 +14,14 @@ const fetchData = () => {
 function App() {
   const [theme, setTheme] = useState(false);
 
-  const { isLoading, data, isError, isFetching } = useQuery("data", fetchData);
+  const { isLoading, data } = useQuery("data", fetchData);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return (
+      <div className="w-full h-[100vh] flex justify-center items-center dark:bg-black">
+        <div className="spinner"></div>
+      </div>
+    );
   }
 
   return (
